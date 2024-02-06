@@ -106,10 +106,10 @@ After successfully joining the tables I noticed some data points in the category
 
 Using this SQL I sorted that 
 ```
-	-- Replace values in Category that have (") with () 
+-- Replace values in Category that have (") with () 
 UPDATE SB_Merged
 SET Category = REPLACE(Category, '"', '');
-``
+```
 
 ![Image](fm.png)
 > Preview of the merged sample dataset
