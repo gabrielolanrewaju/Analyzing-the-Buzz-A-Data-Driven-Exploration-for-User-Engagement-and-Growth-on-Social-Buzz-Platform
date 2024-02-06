@@ -19,29 +19,29 @@ I received seven sample datasets in CSV format: User, Profile, Location, Session
 
 My task involved carefully choosing datasets crucial for analyzing the Top 5 content categories. 
 
-![Image](1.jpg)  
+![Image](1.png)  
 Prioritizing datasets that provide valuable insights into user interactions, reaction types across categories, and scores assigned to each type of reaction, the selected datasets included Content, Reaction, and Reaction Types. 
 
 These datasets were subsequently merged into a unified dataset. Utilizing aggregate score calculations, the popularity of each content category was then determined.
 
-![Image](2.jpg)  
+![Image](2.png)  
 > Preview of the ‘Reactions Types’ Table
 
-![Image](4.jpg)
+![Image](4.png)
 > Preview of the ‘Content’ Table
 
-![Image](3.jpg)
+![Image](3.png)
 > Preview of the ‘Reactions’ Table
 
 ## Next, a quick overview of the cleaning process
 
-![Image](5.jpg)
+![Image](5.png)
 Steps taken here
 * Starting with the ‘ReactionTypes’ table I had to rename the column to remove the spaces between the column names
 * I did the same for the ‘Reactions’ table, I then went ahead to drop the irrelevant column User_ID as it wasn’t needed in this analysis
 
 
-![Image](6.jpg)
+![Image](6.png)
 Next I checked for rows with null or empty values and dropped them using this SQL syntax
 ```
 -- Checking for null values
@@ -66,11 +66,11 @@ WITH RDuplicateCTE AS (
 )
 DELETE FROM RDuplicateCTE WHERE RowNum > 1;
 ```
-![Image](7.jpg)
+![Image](7.png)
 
 * I repeated the process for the ‘Content; table
 
-![Image](8.jpg)
+![Image](8.png)
 
 * I then proceeded to join the tables as one using the SQL JOIN function
 ```
@@ -101,7 +101,7 @@ JOIN
     ReactionTypes RT ON R.Reaction_type = RT.Reaction_type;
 ```
 
-![Image](em.jpg)
+![Image](em.png)
 After successfully joining the tables I noticed some data points in the category Column where entered with a quotation mark (“) which would raise issues if not addressed 
 
 Using this SQL I sorted that 
@@ -111,12 +111,12 @@ UPDATE SB_Merged
 SET Category = REPLACE(Category, '"', '');
 ``
 
-![Image](fm.jpg)
+![Image](fm.png)
 > Preview of the merged sample dataset
 
 ### Presenting the Top 5 Categories
 
-![Image](t5.jpg)
+![Image](t5.png)
 
 Using this SQL Syntax
 ```
@@ -133,21 +133,21 @@ ORDER BY
 ## Insights and Data Findings
 * The analysis unveiled the top 5 content categories, each with its unique engagement score. Animals, Food, Healthy Eating, Science, and Technology emerged as the top 5 content categories by popularity, offering valuable insights into user preferences and content trends.
 
-![Image](11.jpg)
+![Image](11.png)
 > Chart showing the TOP 5 Categories by Popularity
 
 * Beyond the top 5, I explored the number of unique categories (which amounts to a total of 16), the most used reaction type across all content categories- ‘adore’ , and the month with the most posts- January.
 
-![Image](14.jpg)
+![Image](14.png)
 
 * Furthermore, a noticeable dip in posts in the months of June (both in 2020 and 2021) raised an important point about potential low user retention.
 
 **Note**: To delve deeper into the causes behind this trend, I proposed acquiring a dataset with features such as user activity, new feature releases, or external events that may have brought about the dip in post count during June. This additional data will be essential for a more nuanced analysis
 
-![Image](10.jpg)
+![Image](10.png)
 > Image showing other relevant insights
 
-![Image](13.jpg)
+![Image](13.png)
 > Chart showing the total distinct categories ranking by their popularity 
 
 
